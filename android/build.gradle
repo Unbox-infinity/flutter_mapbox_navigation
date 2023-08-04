@@ -14,9 +14,9 @@ buildscript {
             }
             credentials {
                 username = "mapbox"
-                password = project.hasProperty('MAPBOX_DOWNLOADS_TOKEN') ? project.property('MAPBOX_DOWNLOADS_TOKEN') : System.getenv('MAPBOX_DOWNLOADS_TOKEN')
+                password = project.hasProperty('SDK_REGISTRY_TOKEN') ? project.property('SDK_REGISTRY_TOKEN') : System.getenv('SDK_REGISTRY_TOKEN')
                 if (password == null || password == "") {
-                    throw new GradleException("MAPBOX_DOWNLOADS_TOKEN isn't set. Set it to the project properties or to the enviroment variables.")
+                    throw new GradleException("SDK_REGISTRY_TOKEN isn't set. Set it to the project properties or to the enviroment variables.")
                 }
             }
         }
@@ -41,9 +41,9 @@ rootProject.allprojects {
             }
             credentials {
                 username = "mapbox"
-                password = project.hasProperty('MAPBOX_DOWNLOADS_TOKEN') ? project.property('MAPBOX_DOWNLOADS_TOKEN') : System.getenv('MAPBOX_DOWNLOADS_TOKEN')
+                password = project.hasProperty('SDK_REGISTRY_TOKEN') ? project.property('SDK_REGISTRY_TOKEN') : System.getenv('SDK_REGISTRY_TOKEN')
                 if (password == null || password == "") {
-                    throw new GradleException("MAPBOX_DOWNLOADS_TOKEN isn't set. Set it to the project properties or to the enviroment variables.")
+                    throw new GradleException("SDK_REGISTRY_TOKEN isn't set. Set it to the project properties or to the enviroment variables.")
                 }
             }
         }
@@ -100,7 +100,6 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     implementation "com.google.android.gms:play-services-location:21.0.1"
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.9.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     implementation 'androidx.annotation:annotation:1.6.0'

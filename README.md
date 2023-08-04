@@ -54,7 +54,7 @@ Add Turn By Turn Navigation to Your Flutter Application Using MapBox. Never leav
 
 3. Add the MapBox Downloads token with the ```downloads:read``` scope to your gradle.properties file in Android folder to enable downloading the MapBox binaries from the repository. To secure this token from getting checked into source control, you can add it to the gradle.properties of your GRADLE_HOME which is usually at $USER_HOME/.gradle for Mac. This token can be retrieved from your [MapBox Dashboard](https://account.mapbox.com/access-tokens/). You can review the [Token Guide](https://docs.mapbox.com/accounts/guides/tokens/) to learn more about download tokens
 ```text
-MAPBOX_DOWNLOADS_TOKEN=sk.XXXXXXXXXXXXXXX
+SDK_REGISTRY_TOKEN=sk.XXXXXXXXXXXXXXX
 ```
 
 After adding the above, your gradle.properties file may look something like this:
@@ -62,7 +62,7 @@ After adding the above, your gradle.properties file may look something like this
 org.gradle.jvmargs=-Xmx1536M
 android.useAndroidX=true
 android.enableJetifier=true
-MAPBOX_DOWNLOADS_TOKEN=sk.epe9nE9peAcmwNzKVNqSbFfp2794YtnNepe9nE9peAcmwNzKVNqSbFfp2794YtnN.-HrbMMQmLdHwYb8r
+SDK_REGISTRY_TOKEN=sk.epe9nE9peAcmwNzKVNqSbFfp2794YtnNepe9nE9peAcmwNzKVNqSbFfp2794YtnN.-HrbMMQmLdHwYb8r
 ```
 
 4. Update `MainActivity.kt` to extends `FlutterFragmentActivity` vs `FlutterActivity`. Otherwise you'll get `Caused by: java.lang.IllegalStateException: Please ensure that the hosting Context is a valid ViewModelStoreOwner`.
