@@ -57,6 +57,7 @@ class FlutterMapboxNavigationPlugin : FlutterPlugin, MethodCallHandler,
         var showAlternateRoutes: Boolean = true
         var longPressDestinationEnabled: Boolean = true
         var allowsUTurnsAtWayPoints: Boolean = false
+        var enableOnMapTapCallback: Boolean = false
         var navigationMode = DirectionsCriteria.PROFILE_DRIVING_TRAFFIC
         var simulateRoute = false
         var enableFreeDriveMode = false
@@ -64,6 +65,8 @@ class FlutterMapboxNavigationPlugin : FlutterPlugin, MethodCallHandler,
         var mapStyleUrlNight: String? = null
         var navigationLanguage = "en"
         var navigationVoiceUnits = DirectionsCriteria.IMPERIAL
+        var voiceInstructionsEnabled = true
+        var bannerInstructionsEnabled = true
         var zoom = 15.0
         var bearing = 0.0
         var tilt = 0.0
@@ -143,9 +146,24 @@ class FlutterMapboxNavigationPlugin : FlutterPlugin, MethodCallHandler,
             allowsUTurnsAtWayPoints = allowsUTurns
         }
 
+        val onMapTap = arguments?.get("enableOnMapTapCallback") as? Boolean
+        if (onMapTap != null) {
+            enableOnMapTapCallback = onMapTap
+        }
+
         val language = arguments?.get("language") as? String
         if (language != null) {
             navigationLanguage = language
+        }
+
+        val voiceEnabled = arguments?.get("voiceInstructionsEnabled") as? Boolean
+        if (voiceEnabled != null) {
+            voiceInstructionsEnabled = voiceEnabled
+        }
+
+        val bannerEnabled = arguments?.get("bannerInstructionsEnabled") as? Boolean
+        if (bannerEnabled != null) {
+            bannerInstructionsEnabled = bannerEnabled
         }
 
         val units = arguments?.get("units") as? String
