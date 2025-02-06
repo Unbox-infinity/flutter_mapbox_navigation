@@ -5,12 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.R
 
 import org.json.JSONObject
 import androidx.appcompat.app.AppCompatActivity
 import com.eopeter.fluttermapboxnavigation.FlutterMapboxNavigationPlugin
-import com.eopeter.fluttermapboxnavigation.R
 import com.eopeter.fluttermapboxnavigation.databinding.NavigationActivityBinding
 import com.eopeter.fluttermapboxnavigation.models.MapBoxEvents
 import com.eopeter.fluttermapboxnavigation.models.MapBoxRouteProgressEvent
@@ -117,8 +118,10 @@ class NavigationActivity : AppCompatActivity() {
                 CustomInfoPanelEndNavButtonBinder(act)
         }
 
-        MapboxNavigationApp.current()?.registerBannerInstructionsObserver(this.bannerInstructionObserver)
-        MapboxNavigationApp.current()?.registerVoiceInstructionsObserver(this.voiceInstructionObserver)
+        MapboxNavigationApp.current()
+            ?.registerBannerInstructionsObserver(this.bannerInstructionObserver)
+        MapboxNavigationApp.current()
+            ?.registerVoiceInstructionsObserver(this.voiceInstructionObserver)
         MapboxNavigationApp.current()?.registerOffRouteObserver(this.offRouteObserver)
         MapboxNavigationApp.current()?.registerRoutesObserver(this.routesObserver)
         MapboxNavigationApp.current()?.registerLocationObserver(locationObserver)
@@ -146,18 +149,20 @@ class NavigationActivity : AppCompatActivity() {
             }
         }
 
-        registerReceiver(
-            finishBroadcastReceiver,
-            IntentFilter(NavigationLauncher.KEY_STOP_NAVIGATION),
-            RECEIVER_EXPORTED
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(
+                finishBroadcastReceiver,
+                IntentFilter(NavigationLauncher.KEY_STOP_NAVIGATION),
+                RECEIVER_EXPORTED
+            )
 
-        registerReceiver(
-            addWayPointsBroadcastReceiver,
-            IntentFilter(NavigationLauncher.KEY_ADD_WAYPOINTS),
-            RECEIVER_EXPORTED
-        )
 
+            registerReceiver(
+                addWayPointsBroadcastReceiver,
+                IntentFilter(NavigationLauncher.KEY_ADD_WAYPOINTS),
+                RECEIVER_EXPORTED
+            )
+        }
         // TODO set the style Uri
         var styleUrlDay = FlutterMapboxNavigationPlugin.mapStyleUrlDay
         var styleUrlNight = FlutterMapboxNavigationPlugin.mapStyleUrlNight
@@ -196,8 +201,10 @@ class NavigationActivity : AppCompatActivity() {
         }
         binding.navigationView.removeListener(navigationStateListener)
 
-        MapboxNavigationApp.current()?.unregisterBannerInstructionsObserver(this.bannerInstructionObserver)
-        MapboxNavigationApp.current()?.unregisterVoiceInstructionsObserver(this.voiceInstructionObserver)
+        MapboxNavigationApp.current()
+            ?.unregisterBannerInstructionsObserver(this.bannerInstructionObserver)
+        MapboxNavigationApp.current()
+            ?.unregisterVoiceInstructionsObserver(this.voiceInstructionObserver)
         MapboxNavigationApp.current()?.unregisterOffRouteObserver(this.offRouteObserver)
         MapboxNavigationApp.current()?.unregisterRoutesObserver(this.routesObserver)
         MapboxNavigationApp.current()?.unregisterLocationObserver(locationObserver)
